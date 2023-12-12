@@ -30,10 +30,11 @@ local Players = game:GetService("Players");
 local HttpService = game:GetService("HttpService");
 local LocalPlayer = Players.LocalPlayer;
 local SayMessageRequest = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest");
+local bypass = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
 local Debounce = false;
 
 local function MakeRequest(Prompt)
-	return syn.request({
+	return bypass({
 		Url = "https://api.openai.com/v1/completions", 
 		Method = "POST",
 		Headers = {
